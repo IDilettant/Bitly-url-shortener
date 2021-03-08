@@ -1,11 +1,13 @@
 [tool.poetry]
-name = "counttheclicksonlinks"
+name = "Bitly url shorterer"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["IDilettant dedenev1985@gmail.com"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+argparse = "^1.4.0"
+python-dotenv = "^0.15.0"
 
 [tool.poetry.dev-dependencies]
 

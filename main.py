@@ -1,7 +1,10 @@
 import os
 import requests
+import sys
 import json
+import argparse
 
+from dotenv import load_dotenv
 from urllib.parse import urlparse, urlunparse
 
 
@@ -27,22 +30,35 @@ def is_bitlink(url, headers):
     url = 'https://api-ssl.bitly.com/v4/bitlinks/{0}'.format(urlunparse(url))
     response = requests.get(url, headers=headers)
     return response.ok
+
+
+def create_url_Parser():
+    description = '''
+    Accepts a link as input and converts it into a bitlink. 
+    If a bitlink is entered, it returns the total number of clicks on it.
+    '''
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument('url', nargs='+', help='link address')
+    return parser    
     
 
 def main():
+    load_dotenv()
     token = os.getenv('BITLINK_TOKEN')
     headers = {'Authorization': 'Bearer {0}'.format(token)}
-    url = input('Enter a link: ')
-    if is_bitlink(url, headers):
-        try:
-            print(get_count_cliks(url, headers))
-        except requests.exceptions.HTTPError:
-            print('Wrong bitlink. Please, try another!')
-    else:
-        try:
-            print(get_bitlink(url, headers))
-        except requests.exceptions.HTTPError:
-            print('Wrong link. Please, try another!')
+    parser = create_url_Parser()
+    values = parser.parse_args(sys.argv[1:])
+    for url in values.url:
+        if is_bitlink(url, headers):
+            try:
+                print(get_count_cliks(url, headers))
+            except requests.exceptions.HTTPError:
+                print('Wrong bitlink. Please, try another!')
+        else:
+            try:
+                print(get_bitlink(url, headers))
+            except requests.exceptions.HTTPError:
+                print('Wrong link. Please, try another!')
 
 
 if __name__ == '__main__':
