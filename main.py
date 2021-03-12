@@ -1,11 +1,11 @@
-import os
-import requests
-import sys
-import json
 import argparse
-
-from dotenv import load_dotenv
+import json
+import os
+import sys
 from urllib.parse import urlparse, urlunparse
+
+import requests
+from dotenv import load_dotenv
 
 
 def get_bitlink(long_url, headers):
@@ -32,11 +32,9 @@ def is_bitlink(url, headers):
     return response.ok
 
 
-def create_url_Parser():
-    description = '''
-    Accepts a link as input and converts it into a bitlink. 
-    If a bitlink is entered, it returns the total number of clicks on it.
-    '''
+def create_url_parser():
+    description = 'Accepts a link as input and converts it into a bitlink.\n' \
+                  'If a bitlink is entered, it returns the total number of clicks on it.'
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument('url', nargs='+', help='link address')
     return parser    
@@ -46,7 +44,7 @@ def main():
     load_dotenv()
     token = os.getenv('BITLINK_TOKEN')
     headers = {'Authorization': 'Bearer {0}'.format(token)}
-    parser = create_url_Parser()
+    parser = create_url_parser()
     values = parser.parse_args(sys.argv[1:])
     for url in values.url:
         if is_bitlink(url, headers):
