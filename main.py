@@ -1,5 +1,4 @@
 import argparse
-import json
 import os
 import sys
 from urllib.parse import urlparse, urlunparse
