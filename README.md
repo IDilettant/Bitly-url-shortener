@@ -12,7 +12,7 @@ BITLINK_TOKEN=[your API token]
 ```
 
 It's recommended to use [pyenv](https://github.com/pyenv/pyenv) to isolate the project.
-Python3 and poetry should be already installed. Then use poetry to install dependencies:
+Python3 and [poetry](https://python-poetry.org/) should be already installed. Then use poetry to install dependencies:
 
 ```Python3
 poetry install
