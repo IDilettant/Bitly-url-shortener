@@ -1,4 +1,4 @@
-# Bitly url shorterer
+# Bitly url shortener
 
 It's console utility which takes a link as input and converts it to a short link(bitlink) with [bit.ly](https://bitly.com). 
 If a bitlink is entered, it returns the total number of clicks on it.
