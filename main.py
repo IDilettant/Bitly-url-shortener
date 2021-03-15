@@ -14,7 +14,7 @@ def get_bitlink(long_url, headers):
     return response.json()['id']
 
 
-def get_count_clics(bitlink, headers):
+def get_count_clicks(bitlink, headers):
     bitlink = urlparse(bitlink)._replace(scheme='')
     bitlink = urlunparse(bitlink)
     url = 'https://api-ssl.bitly.com/v4/bitlinks/{0}/clicks/summary'.format(bitlink)
@@ -47,7 +47,7 @@ def main():
     for url in args.urls:
         if is_bitlink(url, headers):
             try:
-                print(get_count_clics(url, headers))
+                print(get_count_clicks(url, headers))
             except requests.exceptions.HTTPError:
                 print('Wrong bitlink. Please, try another!')
         else:
